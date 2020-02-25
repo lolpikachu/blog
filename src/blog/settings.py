@@ -80,17 +80,30 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #     }
 # }
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog',
-        'USER': 'admin',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '',
+if DEBUG:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'blog',
+                'USER': 'admin',
+                'PASSWORD': '123',
+                'HOST': 'localhost',
+                'PORT': '',
+            }
+        }
+else:
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'blogdb',
+            'USER': 'bloguser',
+            'PASSWORD': '123',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
+
+
 
 
 # Password validation
@@ -132,9 +145,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
-VENV_PATH = os.path.dirname(BASE_DIR)
-STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
-MEDIA_ROOT = os.path.join(VENV_PATH, 'media_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 # Django Allauth
 
