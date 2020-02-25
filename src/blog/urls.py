@@ -3,13 +3,22 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from post.views import index, blog, post
+from post.views import (
+    index, blog, post, search,
+    post_update, post_delete, post_create
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('blog/', blog),
-     path('post/', post),
+    path('blog/', blog, name='post-list'),
+    path('search/', search, name='search'),
+    path('create/', post_create, name='post-create'),
+    path('post/<id>/', post, name='post-detail'),
+    path('post/<id>/update', post_update, name='post-update'),
+    path('post/<id>/delete', post_delete, name='post-delete'),
+    path('accounts/', include('allauth.urls')),
+
 ]
 
 if settings.DEBUG:
